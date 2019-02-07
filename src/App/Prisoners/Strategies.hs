@@ -15,7 +15,7 @@ data Strategy = Strategy { runStrategy :: Prisoner -> [Box] }
 halfAndHalfSrategy :: Strategy
 halfAndHalfSrategy = Strategy
   {
-    runStrategy = \nthPrisoner -> if nthPrisoner < 50
+    runStrategy = \nthPrisoner -> if nthPrisoner < 51
                                   then [1..50]
                                   else [51..100]
   }
