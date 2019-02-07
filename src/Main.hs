@@ -1,8 +1,11 @@
 module Main where
-import App.Helpers.List (shuffle)
 import Control.Monad (replicateM)
 import Data.List (all)
 import qualified Data.Map as Map
+
+import App.Core (Box, Prisoner)
+import App.Helpers.List (shuffle)
+import App.Prisoners.Strategies (runStrategy, halfAndHalfSrategy)
 
 data SimulationOutcome = SimulationOutcome
   {
@@ -13,19 +16,9 @@ data SimulationOutcome = SimulationOutcome
 type Box = Int
 type Prisoner = Int
 
--- Given a prisoner, which boxes do they pick?
-type Strategy = Prisoner -> [Box]
-
--- ^ halfAndHalfSrategy takes an nth prisoner and returns the list of box #s that prisoner should search
-halfAndHalfSrategy :: Strategy
-halfAndHalfSrategy nthPrisoner =
-  if nthPrisoner < 50
-  then [1..50]
-  else [51..100]
-
 main =
   let numberOfRuns = 1000 in
-  do results <- runSimulationWithStrategy numberOfRuns halfAndHalfSrategy
+  do results <- runSimulationWithStrategy numberOfRuns (runStrategy halfAndHalfSrategy)
      putStrLn $ "Ran " ++ show numberOfRuns ++ " times"
      print results
 
