@@ -1,5 +1,5 @@
 module Main where
-import ListHelpers (shuffle)
+import App.Helpers.List (shuffle)
 import Control.Monad (replicateM)
 import Data.List (all)
 import qualified Data.Map as Map

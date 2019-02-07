@@ -1,4 +1,4 @@
-module ListHelpers
+module App.Helpers.List
   (
     shuffle
   ) where
