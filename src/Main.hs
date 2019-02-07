@@ -10,9 +10,6 @@ data SimulationOutcome = SimulationOutcome
   , fails :: Int
   } deriving Show
 
-data Outcome = Freedom | Fail
-             deriving (Eq)
-
 type Box = Int
 type Prisoner = Int
 
@@ -26,7 +23,6 @@ halfAndHalfSrategy nthPrisoner =
   then [1..50]
   else [51..100]
 
-main :: IO ()
 main =
   let numberOfRuns = 1000 in
   do results <- runSimulationWithStrategy numberOfRuns halfAndHalfSrategy
@@ -39,7 +35,6 @@ runSimulationWithStrategy ntimes strategy =
      let fails = length $ filter (== False) individualRunResults
      return $ SimulationOutcome { wins = wins, fails = fails }
 
-
 runSimulation' strategy =
   do assignments <- assignPrisonersToBoxes
      randomlyOrderedPrisoners <- shuffle [1..100]
@@ -49,7 +44,6 @@ runSimulation' strategy =
 
 evaluatePrisonerChoices assignments choices =
     Map.isSubmapOfBy elem assignments choices && Map.isSubmapOfBy (flip elem) choices assignments
-
 
 assignPrisonersToBoxes =
   do boxes <- shuffle [1..100]
